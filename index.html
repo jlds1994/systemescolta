@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,182 +8,117 @@
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,Arial,sans-serif;
-}
-
 body{
-    background:#edf2f7;
-    padding:25px;
+    font-family:Arial;
+    background:#eef2f7;
+    padding:15px;
 }
 
 .container{
-    max-width:1200px;
+    max-width:1100px;
     margin:auto;
 }
 
 .card{
     background:#fff;
-    padding:25px;
+    padding:20px;
     border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
 }
 
 h1{
     text-align:center;
     color:#003366;
-    margin-bottom:25px;
 }
 
 h2{
-    margin-top:25px;
-    margin-bottom:15px;
+    margin-top:20px;
     color:#003366;
-    border-bottom:2px solid #ddd;
+    border-bottom:1px solid #ddd;
     padding-bottom:5px;
 }
 
-.grid2{
+.grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
+    gap:10px;
 }
 
 .grid4{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:10px;
 }
 
 label{
-    display:block;
     font-weight:bold;
-    margin-bottom:5px;
+    display:block;
+    margin-top:10px;
 }
 
-input[type=text],
-input[type=date],
-input[type=time]{
-
+input{
     width:100%;
     padding:10px;
     border:1px solid #ccc;
     border-radius:6px;
-    font-size:15px;
-}
-
-.radio{
-    display:flex;
-    gap:30px;
-    margin-top:10px;
 }
 
 button{
-
     width:100%;
-    margin-top:25px;
-    padding:15px;
+    margin-top:20px;
+    padding:14px;
     background:#003366;
     color:#fff;
     border:none;
     border-radius:8px;
-    font-size:18px;
-    cursor:pointer;
-
+    font-size:16px;
 }
 
 button:hover{
     background:#00509d;
 }
 
+.radio{
+    display:flex;
+    gap:20px;
+    margin-top:10px;
+}
+
 #resumo{
-
     display:none;
-    margin-top:30px;
-    padding:20px;
-    border-radius:10px;
+    margin-top:20px;
+    padding:15px;
     background:#f7f7f7;
-    border-left:6px solid #003366;
-    line-height:1.9;
-
+    border-left:5px solid #003366;
+    line-height:1.8;
 }
 
 table{
-
     width:100%;
-    margin-top:30px;
+    margin-top:20px;
     border-collapse:collapse;
-
+    overflow-x:auto;
 }
 
 th{
-
     background:#003366;
-    color:white;
-
+    color:#fff;
 }
 
 th,td{
-
     border:1px solid #ccc;
-    padding:10px;
+    padding:8px;
     text-align:center;
-
+    font-size:14px;
 }
 
-/* =========================
-   RESPONSIVO MOBILE
-========================= */
-
-@media (max-width: 768px){
-
-    body{
-        padding:10px;
-    }
-
-    .card{
-        padding:15px;
-    }
-
-    h1{
-        font-size:20px;
-    }
-
-    h2{
-        font-size:16px;
-    }
-
-    .grid2,
-    .grid4{
+/* MOBILE */
+@media(max-width:768px){
+    .grid,.grid4{
         grid-template-columns:1fr;
     }
+}
 
-    input{
-        font-size:16px;
-        padding:12px;
-    }
-
-    button{
-        font-size:16px;
-        padding:14px;
-    }
-
-    table{
-        font-size:12px;
-        display:block;
-        overflow-x:auto;
-        white-space:nowrap;
-    }
-
-    #resumo{
-        font-size:14px;
-        line-height:1.6;
-    }
-}    
-    
 </style>
 
 </head>
@@ -198,127 +131,50 @@ th,td{
 
 <h1>REGISTRO DE SERVIÇO</h1>
 
-<div class="grid2">
-
-<div>
-
 <label>Data</label>
-
 <input type="date" id="data">
 
-</div>
-
-<div>
-
-<label>Equipe</label>
-
-<input type="text" id="equipe">
-
-</div>
-
-<div>
-    
-<div>
-
 <label>Motorista</label>
-
 <input type="text" id="motorista">
 
-</div>
-
-<div>
-
 <label>Segurança</label>
-
 <input type="text" id="seguranca">
 
-</div>
-
-<div>
-
 <label>Placa</label>
-
 <input type="text" id="placa">
-
-</div>
-
-</div>
 
 <h2>Deslocamento</h2>
 
 <div class="grid4">
 
 <div>
-
-<label>KM Inicial</label>
-
-<input
-type="text"
-inputmode="numeric"
-pattern="[0-9]*"
-maxlength="6"
-oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-
+<label>KM Início</label>
+<input type="text" id="kmInicioDesloc" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 </div>
 
 <div>
-
-<label>Hora Inicial</label>
-
+<label>Hora</label>
 <input type="time" id="horaInicioDesloc">
-
 </div>
 
 <div>
-
 <label>KM Final</label>
-
-<input
-type="text"
-inputmode="numeric"
-pattern="[0-9]*"
-maxlength="6"
-oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-
+<input type="text" id="kmFinalDesloc" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 </div>
 
 <div>
-
-<label>Hora Final</label>
-
-<input type="time"
-id="horaFinalDesloc">
-
+<label>Hora</label>
+<input type="time" id="horaFinalDesloc">
 </div>
 
 </div>
 
-<h2>Tipo de Serviço</h2>
+<h2>Tipo</h2>
 
 <div class="radio">
 
-<label>
-
-<input
-type="radio"
-name="tipo"
-value="Escolta"
-checked>
-
-Escolta
-
-</label>
-
-<label>
-
-<input
-type="radio"
-name="tipo"
-value="Preservação">
-
-Preservação
-
-</label>
+<label><input type="radio" name="tipo" value="Escolta" checked> Escolta</label>
+<label><input type="radio" name="tipo" value="Preservação"> Preservação</label>
 
 </div>
 
@@ -327,79 +183,44 @@ Preservação
 <div class="grid4">
 
 <div>
-
-<label>KM Inicial</label>
-
-<input
-type="text"
-inputmode="numeric"
-pattern="[0-9]*"
-maxlength="6"
-oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-
+<label>KM Início</label>
+<input type="text" id="kmInicioServico" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 </div>
 
 <div>
-
-<label>Hora Inicial</label>
-
-<input
-type="time"
-id="horaInicioServico">
-
+<label>Hora</label>
+<input type="time" id="horaInicioServico">
 </div>
 
 <div>
-
 <label>KM Final</label>
-
-<input
-type="text"
-inputmode="numeric"
-pattern="[0-9]*"
-maxlength="6"
-oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
-
+<input type="text" id="kmFinalServico" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 </div>
 
 <div>
-
-<label>Hora Final</label>
-
-<input
-type="time"
-id="horaFinalServico">
-
+<label>Hora</label>
+<input type="time" id="horaFinalServico">
 </div>
 
 </div>
 
-<button onclick="salvarRegistro()">
-
-Salvar Registro
-
-</button>
+<button onclick="salvar()">Salvar Registro</button>
 
 <div id="resumo"></div>
 
 <table>
 
 <thead>
-
 <tr>
-
 <th>Data</th>
 <th>Motorista</th>
 <th>Segurança</th>
 <th>Tipo</th>
 <th>KM Total</th>
-
 </tr>
-
 </thead>
 
-<tbody id="tbody">
-</tbody>
+<tbody id="tabela"></tbody>
 
 </table>
 
@@ -409,158 +230,63 @@ Salvar Registro
 
 <script>
 
-function formatarKm(km){
-
-    km = km.toString().replace(/\D/g,'');
-
-    return km.padStart(6,'0');
-
+function v(id){
+    let el=document.getElementById(id);
+    return el ? el.value : "";
 }
 
-function salvarRegistro(){
+function salvar(){
 
-    function get(id){
-        let el = document.getElementById(id);
-        return el ? el.value : "";
-    }
+let data=v("data");
+let motorista=v("motorista");
+let seguranca=v("seguranca");
+let placa=v("placa");
 
-    let data = get("data");
-    let motorista = get("motorista");
-    let seguranca = get("seguranca");
-    let placa = get("placa");
+let kmIni=parseInt(v("kmInicioDesloc")||0);
+let kmFim=parseInt(v("kmFinalDesloc")||0);
 
-    let kmInicioDesloc = parseInt(get("kmInicioDesloc") || "0");
-    let kmFinalDesloc = parseInt(get("kmFinalDesloc") || "0");
+let kmTotal=kmFim-kmIni;
+if(isNaN(kmTotal) || kmTotal<0) kmTotal=0;
 
-    let kmTotal = kmFinalDesloc - kmInicioDesloc;
+let tipo=document.querySelector('input[name="tipo"]:checked')?.value || "";
 
-    if(isNaN(kmTotal) || kmTotal < 0){
-        kmTotal = 0;
-    }
+document.getElementById("tabela").innerHTML+=`
+<tr>
+<td>${data}</td>
+<td>${motorista}</td>
+<td>${seguranca}</td>
+<td>${tipo}</td>
+<td>${kmTotal} km</td>
+</tr>
+`;
 
-    let tipo = document.querySelector('input[name="tipo"]:checked')?.value || "";
+document.getElementById("resumo").style.display="block";
 
-    document.getElementById("tbody").innerHTML += `
-        <tr>
-            <td>${data}</td>
-            <td>${motorista}</td>
-            <td>${seguranca}</td>
-            <td>${tipo}</td>
-            <td>${kmTotal} km</td>
-        </tr>
-    `;
+document.getElementById("resumo").innerHTML=`
 
-    document.getElementById("resumo").style.display = "block";
-}
+<h2>RESENHA DE SERVIÇO</h2>
 
-    let resumo=document.getElementById("resumo");
+Data: ${data}<br><br>
 
-    resumo.style.display="block";
+Seg: ${seguranca} / Mot: ${motorista} / Placa: ${placa}<br><br>
 
-    resumo.innerHTML=`
+Tipo: ${tipo}<br><br>
 
-<h2 style="margin-top:0;">RESENHA DE SERVIÇO</h2>
+Início do deslocamento / KM ${String(kmIni).padStart(6,'0')} / ${v("horaInicioDesloc")}<br><br>
 
-<strong>Data:</strong> ${data}
+Início da ${tipo.toLowerCase()} / KM ${String(v("kmInicioServico")).padStart(6,'0')} / ${v("horaInicioServico")}<br><br>
 
-<br><br>
+Final da ${tipo.toLowerCase()} / KM ${String(v("kmFinalServico")).padStart(6,'0')} / ${v("horaFinalServico")}<br><br>
 
-Seg: ${seguranca} / Mot: ${motorista} / Placa: ${placa}
+Final do deslocamento / KM ${String(kmFim).padStart(6,'0')} / ${v("horaFinalDesloc")}<br><br>
 
-<br><br>
-
-<strong>Tipo:</strong> ${tipo}
-
-<br><br>
-
-Início do deslocamento / KM ${kmInicioDesloc} / ${horaInicioDesloc}
-
-<br><br>
-
-Início da ${tipo.toLowerCase()} / KM ${kmInicioServico} / ${horaInicioServico}
-<br><br>
-
-Final da ${tipo.toLowerCase()} / KM ${kmFinalServico} / ${horaFinalServico}
-
-<br><br>
-
-Final do deslocamento / KM ${kmFinalDesloc} / ${horaFinalDesloc}
-
-<br><br>
-
-<strong>KM Total Percorrido:</strong> ${kmTotal} km
+KM Total: ${kmTotal} km
 
 `;
 
 }
 
-function imprimirResenha(){
-
-    var conteudo=document.getElementById("resumo").innerHTML;
-
-    var tela=window.open("","","width=900,height=700");
-
-    tela.document.write(`
-        <html>
-        <head>
-            <title>Resenha de Serviço</title>
-            <style>
-
-            body{
-                font-family:Arial;
-                padding:40px;
-                font-size:18px;
-                line-height:2;
-            }
-
-            h2{
-                color:#003366;
-            }
-
-            </style>
-        </head>
-
-        <body>
-
-        ${conteudo}
-
-        </body>
-
-        </html>
-    `);
-
-    tela.document.close();
-
-    tela.print();
-
-}
-
-function limparFormulario(){
-
-    document.querySelectorAll("input[type=text],input[type=date],input[type=time]").forEach(function(campo){
-
-        campo.value="";
-
-    });
-
-    document.querySelector('input[value="Escolta"]').checked=true;
-
-}
-
 </script>
 
-<div style="margin-top:20px;display:flex;gap:10px;">
-
-<button onclick="imprimirResenha()" style="flex:1;background:#198754;">
-🖨️ Imprimir Resenha
-</button>
-
-<button onclick="limparFormulario()" style="flex:1;background:#6c757d;">
-🧹 Limpar
-</button>
-
-</div>
-
 </body>
-
 </html>
