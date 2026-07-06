@@ -419,53 +419,39 @@ function formatarKm(km){
 
 function salvarRegistro(){
 
-    let data=document.getElementById("data").value;
+    function get(id){
+        let el = document.getElementById(id);
+        return el ? el.value : "";
+    }
 
-    let equipe=document.getElementById("equipe").value;
+    let data = get("data");
+    let motorista = get("motorista");
+    let seguranca = get("seguranca");
+    let placa = get("placa");
 
-    let motorista=document.getElementById("motorista").value;
+    let kmInicioDesloc = parseInt(get("kmInicioDesloc") || "0");
+    let kmFinalDesloc = parseInt(get("kmFinalDesloc") || "0");
 
-    let seguranca=document.getElementById("seguranca").value;
+    let kmTotal = kmFinalDesloc - kmInicioDesloc;
 
-    let placa=document.getElementById("placa").value.toUpperCase();
+    if(isNaN(kmTotal) || kmTotal < 0){
+        kmTotal = 0;
+    }
 
-    let kmInicioDesloc=formatarKm(document.getElementById("kmInicioDesloc").value);
-
-    let kmFinalDesloc=formatarKm(document.getElementById("kmFinalDesloc").value);
-
-    let horaInicioDesloc=document.getElementById("horaInicioDesloc").value;
-
-    let horaFinalDesloc=document.getElementById("horaFinalDesloc").value;
-
-    let kmInicioServico=formatarKm(document.getElementById("kmInicioServico").value);
-
-    let kmFinalServico=formatarKm(document.getElementById("kmFinalServico").value);
-
-    let horaInicioServico=document.getElementById("horaInicioServico").value;
-
-    let horaFinalServico=document.getElementById("horaFinalServico").value;
-
-    let tipo=document.querySelector('input[name="tipo"]:checked').value;
-
-    let kmTotal=parseInt(kmFinalDesloc)-parseInt(kmInicioDesloc);
+    let tipo = document.querySelector('input[name="tipo"]:checked')?.value || "";
 
     document.getElementById("tbody").innerHTML += `
+        <tr>
+            <td>${data}</td>
+            <td>${motorista}</td>
+            <td>${seguranca}</td>
+            <td>${tipo}</td>
+            <td>${kmTotal} km</td>
+        </tr>
+    `;
 
-<tr>
-
-<td>${data}</td>
-
-<td>${motorista}</td>
-
-<td>${seguranca}</td>
-
-<td>${tipo}</td>
-
-<td>${kmTotal} km</td>
-
-</tr>
-
-`;
+    document.getElementById("resumo").style.display = "block";
+}
 
     let resumo=document.getElementById("resumo");
 
