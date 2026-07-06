@@ -210,14 +210,6 @@ th,td{
 
 <div>
 
-<label>Equipe</label>
-
-<input type="text" id="equipe">
-
-</div>
-
-<div>
-
 <label>Motorista</label>
 
 <input type="text" id="motorista">
@@ -252,7 +244,8 @@ th,td{
 
 <input
 type="text"
-id="kmInicioDesloc"
+inputmode="numeric"
+pattern="[0-9]*"
 maxlength="6"
 oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 
@@ -272,7 +265,8 @@ oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 
 <input
 type="text"
-id="kmFinalDesloc"
+inputmode="numeric"
+pattern="[0-9]*"
 maxlength="6"
 oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 
@@ -328,7 +322,8 @@ Preservação
 
 <input
 type="text"
-id="kmInicioServico"
+inputmode="numeric"
+pattern="[0-9]*"
 maxlength="6"
 oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 
@@ -350,7 +345,8 @@ id="horaInicioServico">
 
 <input
 type="text"
-id="kmFinalServico"
+inputmode="numeric"
+pattern="[0-9]*"
 maxlength="6"
 oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
 
