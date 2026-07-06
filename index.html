@@ -210,6 +210,16 @@ th,td{
 
 <div>
 
+<label>Equipe</label>
+
+<input type="text" id="equipe">
+
+</div>
+
+<div>
+    
+<div>
+
 <label>Motorista</label>
 
 <input type="text" id="motorista">
@@ -410,6 +420,8 @@ function formatarKm(km){
 function salvarRegistro(){
 
     let data=document.getElementById("data").value;
+
+    let equipe=document.getElementById("equipe").value;
 
     let motorista=document.getElementById("motorista").value;
 
