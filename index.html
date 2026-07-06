@@ -230,6 +230,8 @@ th,td{
 
 <script>
 
+let registros = JSON.parse(localStorage.getItem("registros") || "[]");
+    
 function v(id){
     let el=document.getElementById(id);
     return el ? el.value : "";
@@ -284,8 +286,50 @@ KM Total: ${kmTotal} km
 
 `;
 
+// cria registro
+let registro = {
+    data,
+    motorista,
+    seguranca,
+    placa,
+    tipo,
+    kmTotal
+};
+
+// salva no array
+registros.push(registro);
+
+// salva no localStorage
+localStorage.setItem("registros", JSON.stringify(registros));
+
+carregarHistorico();
+    
 }
 
+function carregarHistorico(){
+
+let tabela = document.getElementById("tabela");
+
+tabela.innerHTML = "";
+
+registros.forEach(r => {
+
+    tabela.innerHTML += `
+    <tr>
+        <td>${r.data}</td>
+        <td>${r.motorista}</td>
+        <td>${r.seguranca}</td>
+        <td>${r.tipo}</td>
+        <td>${r.kmTotal}</td>
+    </tr>
+    `;
+
+});
+
+}
+
+carregarHistorico();
+    
 </script>
 
 </body>
