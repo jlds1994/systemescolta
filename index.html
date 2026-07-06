@@ -126,7 +126,7 @@ th,td{
 <h1>REGISTRO DE SERVIÇO</h1>
 
 <label>Data</label>
-<input type="text" id="data" placeholder="dd/mm/aaaa">
+<input type="date" id="data">
 
 <label>Motorista</label>
 <input type="text" id="motorista">
@@ -135,7 +135,7 @@ th,td{
 <input type="text" id="seguranca">
 
 <label>Placa</label>
-<input type="text" id="placa">
+<input type="text" id="placa" placeholder="ABC-1X00" maxlength="8" oninput="mascaraPlacaMercosul(this)">
 
 <h2>Deslocamento</h2>
 
@@ -148,7 +148,7 @@ th,td{
 
 <div>
 <label>Hora</label>
-<input type="text" id="horaInicioDesloc" placeholder="HH:MM">
+<input type="time" id="horaInicioDesloc">
 </div>
 
 <div>
@@ -158,7 +158,7 @@ th,td{
 
 <div>
 <label>Hora</label>
-<input type="text" id="horaFinalDesloc" placeholder="HH:MM">
+<input type="time" id="horaFinalDesloc">
 </div>
 
 </div>
@@ -183,7 +183,7 @@ th,td{
 
 <div>
 <label>Hora</label>
-<input type="text" id="horaInicioServico" placeholder="HH:MM">
+<input type="time" id="horaInicioServico">
 </div>
 
 <div>
@@ -193,7 +193,7 @@ th,td{
 
 <div>
 <label>Hora</label>
-<input type="text" id="horaFinalServico" placeholder="HH:MM">
+<input type="time" id="horaFinalServico">
 </div>
 
 </div>
@@ -216,6 +216,7 @@ th,td{
 </thead>
 
 <tbody id="tabela"></tbody>
+
 </table>
 
 </div>
@@ -225,6 +226,20 @@ th,td{
 <script>
 
 let registros = JSON.parse(localStorage.getItem("registros") || "[]");
+
+function mascaraPlacaMercosul(input){
+
+let valor = input.value.toUpperCase();
+valor = valor.replace(/[^A-Z0-9]/g, "");
+valor = valor.slice(0,7);
+
+if(valor.length > 3){
+    valor = valor.slice(0,3) + "-" + valor.slice(3);
+}
+
+input.value = valor;
+
+}
 
 function salvar(){
 
@@ -264,9 +279,9 @@ Seg: ${seguranca} / Mot: ${motorista} / Placa: ${placa}<br><br>
 
 Tipo: ${tipo}<br><br>
 
-Início do deslocamento / KM ${kmIni}<br><br>
+Início do deslocamento / KM ${String(kmIni).padStart(6,'0')} / ${document.getElementById("horaInicioDesloc").value}<br><br>
 
-Final do deslocamento / KM ${kmFim}<br><br>
+Final do deslocamento / KM ${String(kmFim).padStart(6,'0')} / ${document.getElementById("horaFinalDesloc").value}<br><br>
 
 KM Total: ${kmTotal}
 `;
