@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Registro de Serviço</title>
+<title>Sistema de Serviço</title>
 
 <style>
 
@@ -38,18 +38,6 @@ h2{
     padding-bottom:5px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.grid4{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-}
-
 label{
     font-weight:bold;
     display:block;
@@ -61,6 +49,13 @@ input{
     padding:10px;
     border:1px solid #ccc;
     border-radius:6px;
+    font-size:16px;
+}
+
+.grid4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
 button{
@@ -97,7 +92,6 @@ table{
     width:100%;
     margin-top:20px;
     border-collapse:collapse;
-    overflow-x:auto;
 }
 
 th{
@@ -114,7 +108,7 @@ th,td{
 
 /* MOBILE */
 @media(max-width:768px){
-    .grid,.grid4{
+    .grid4{
         grid-template-columns:1fr;
     }
 }
@@ -132,7 +126,7 @@ th,td{
 <h1>REGISTRO DE SERVIÇO</h1>
 
 <label>Data</label>
-<input type="text" id="data" placeholder="Data (dd/mm/aaaa)">
+<input type="text" id="data" placeholder="dd/mm/aaaa">
 
 <label>Motorista</label>
 <input type="text" id="motorista">
@@ -208,8 +202,9 @@ th,td{
 
 <div id="resumo"></div>
 
-<table>
+<h2>HISTÓRICO</h2>
 
+<table>
 <thead>
 <tr>
 <th>Data</th>
@@ -221,7 +216,6 @@ th,td{
 </thead>
 
 <tbody id="tabela"></tbody>
-
 </table>
 
 </div>
@@ -231,62 +225,22 @@ th,td{
 <script>
 
 let registros = JSON.parse(localStorage.getItem("registros") || "[]");
-    
-function v(id){
-    let el=document.getElementById(id);
-    return el ? el.value : "";
-}
 
 function salvar(){
 
-let data=v("data");
-let motorista=v("motorista");
-let seguranca=v("seguranca");
-let placa=v("placa");
+let data = document.getElementById("data").value || "";
+let motorista = document.getElementById("motorista").value || "";
+let seguranca = document.getElementById("seguranca").value || "";
+let placa = document.getElementById("placa").value || "";
 
-let kmIni=parseInt(v("kmInicioDesloc")||0);
-let kmFim=parseInt(v("kmFinalDesloc")||0);
+let kmIni = parseInt(document.getElementById("kmInicioDesloc").value || "0");
+let kmFim = parseInt(document.getElementById("kmFinalDesloc").value || "0");
 
-let kmTotal=kmFim-kmIni;
-if(isNaN(kmTotal) || kmTotal<0) kmTotal=0;
+let kmTotal = kmFim - kmIni;
+if(isNaN(kmTotal) || kmTotal < 0) kmTotal = 0;
 
-let tipo=document.querySelector('input[name="tipo"]:checked')?.value || "";
+let tipo = document.querySelector('input[name="tipo"]:checked')?.value || "";
 
-document.getElementById("tabela").innerHTML+=`
-<tr>
-<td>${data}</td>
-<td>${motorista}</td>
-<td>${seguranca}</td>
-<td>${tipo}</td>
-<td>${kmTotal} km</td>
-</tr>
-`;
-
-document.getElementById("resumo").style.display="block";
-
-document.getElementById("resumo").innerHTML=`
-
-<h2>RESENHA DE SERVIÇO</h2>
-
-Data: ${data}<br><br>
-
-Seg: ${seguranca} / Mot: ${motorista} / Placa: ${placa}<br><br>
-
-Tipo: ${tipo}<br><br>
-
-Início do deslocamento / KM ${String(kmIni).padStart(6,'0')} / ${v("horaInicioDesloc")}<br><br>
-
-Início da ${tipo.toLowerCase()} / KM ${String(v("kmInicioServico")).padStart(6,'0')} / ${v("horaInicioServico")}<br><br>
-
-Final da ${tipo.toLowerCase()} / KM ${String(v("kmFinalServico")).padStart(6,'0')} / ${v("horaFinalServico")}<br><br>
-
-Final do deslocamento / KM ${String(kmFim).padStart(6,'0')} / ${v("horaFinalDesloc")}<br><br>
-
-KM Total: ${kmTotal} km
-
-`;
-
-// cria registro
 let registro = {
     data,
     motorista,
@@ -296,14 +250,27 @@ let registro = {
     kmTotal
 };
 
-// salva no array
 registros.push(registro);
-
-// salva no localStorage
 localStorage.setItem("registros", JSON.stringify(registros));
 
 carregarHistorico();
-    
+
+document.getElementById("resumo").style.display="block";
+
+document.getElementById("resumo").innerHTML = `
+<h2>RESENHA DE SERVIÇO</h2>
+
+Seg: ${seguranca} / Mot: ${motorista} / Placa: ${placa}<br><br>
+
+Tipo: ${tipo}<br><br>
+
+Início do deslocamento / KM ${kmIni}<br><br>
+
+Final do deslocamento / KM ${kmFim}<br><br>
+
+KM Total: ${kmTotal}
+`;
+
 }
 
 function carregarHistorico(){
@@ -314,22 +281,22 @@ tabela.innerHTML = "";
 
 registros.forEach(r => {
 
-    tabela.innerHTML += `
-    <tr>
-        <td>${r.data}</td>
-        <td>${r.motorista}</td>
-        <td>${r.seguranca}</td>
-        <td>${r.tipo}</td>
-        <td>${r.kmTotal}</td>
-    </tr>
-    `;
+tabela.innerHTML += `
+<tr>
+<td>${r.data}</td>
+<td>${r.motorista}</td>
+<td>${r.seguranca}</td>
+<td>${r.tipo}</td>
+<td>${r.kmTotal}</td>
+</tr>
+`;
 
 });
 
 }
 
 carregarHistorico();
-    
+
 </script>
 
 </body>
